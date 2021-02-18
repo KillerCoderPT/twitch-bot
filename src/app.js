@@ -3,7 +3,15 @@ require("dotenv").config();
 const tmi = require("tmi.js");
 
 // Commands
-const { status, statusById, buddies, mods } = require("./controllers/commands");
+const {
+  status,
+  statusById,
+  buddies,
+  mods,
+  commands,
+  github,
+  discord,
+} = require("./controllers/commands");
 
 // Utils
 const { getHowManyHoursIsLive } = require("./controllers/utils");
@@ -34,6 +42,9 @@ client.connect();
 client.on("message", (channel, tags, message, self) => {
   if (self) return;
 
+  // List all the commands
+  commands(client)(channel, message);
+
   // My Current Status
   status(client, getStatus)(channel, tags, message);
 
@@ -45,4 +56,10 @@ client.on("message", (channel, tags, message, self) => {
 
   // Mods
   mods(client)(channel, message);
+
+  // GitHub
+  github(client)(channel, message);
+
+  // Discord
+  discord(client)(channel, message);
 });

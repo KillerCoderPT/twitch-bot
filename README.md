@@ -6,9 +6,7 @@
 
     [ ] Create new Commands
 
-        [ ] Command to show all the avaible commands
-
-            [ ] Build an array with all the commands
+        [x] Command to show all the avaible commands
 
         [x] My Current status
         
@@ -24,9 +22,11 @@
 
         [ ] GitHub
 
-            [ ] Display url
+            [X] Display url
         
-            [ ] List of current Projects (Axios Call)
+            [ ] List of current Twitch Projects (Axios Call)
+
+            [X] By ID = !github Twitch-Bot -- Display the github url repo
 
         [x] Current Status
 
