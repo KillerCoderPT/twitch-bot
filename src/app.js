@@ -18,7 +18,7 @@ const { getHowManyHoursIsLive } = require("./controllers/utils");
 const buddiesList = require("./controllers/utils/buddies.json");
 
 // Axios Calls
-const { getStatus, getStatusById } = require("./controllers/axios");
+const { getStatus, getStatusById, getGithubProjects } = require("./controllers/axios");
 
 // TMI Client Options
 const client = new tmi.client({
@@ -39,17 +39,17 @@ const client = new tmi.client({
 client.connect();
 
 // When the users send a message
-client.on("message", (channel, tags, message, self) => {
+client.on("message", (channel, userstate, message, self) => {
   if (self) return;
 
   // List all the commands
   commands(client)(channel, message);
 
   // My Current Status
-  status(client, getStatus)(channel, tags, message);
+  status(client, getStatus)(channel, userstate, message);
 
   // Status with ID
-  statusById(client, getStatusById)(channel, tags, message);
+  statusById(client, getStatusById)(channel, userstate, message);
 
   // Buddies
   buddies(client, buddiesList)(channel, message);
@@ -58,7 +58,7 @@ client.on("message", (channel, tags, message, self) => {
   mods(client)(channel, message);
 
   // GitHub
-  github(client)(channel, message);
+  github(client, getGithubProjects)(channel, message);
 
   // Discord
   discord(client)(channel, message);

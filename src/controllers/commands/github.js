@@ -1,32 +1,39 @@
-module.exports.github = (client) => (channel, message) => {
-  const say = (url) => {
-    client.say(channel, `Visit ${url}`);
-  };
+module.exports.github = (client, axiosCall) => (channel, message) => {
+  // msg is now !github and message is the rest of the array
+  const msg = message.toLowerCase().split(" ");
 
-  if (message.toLowerCase() === "!github") {
-    say("https://github.com/KillerCoderPT");
-  }
+  if (msg[0] === "!github") {
+    
+    switch (msg[1]) {
+      // Show Profile
+      case undefined:
+        client.say(channel, `Visit https://github.com/KillerCoderPT`);
+        break;
 
-  const msg = message.split(" ");
-
-  if (msg.length > 1 && msg[0].toLowerCase().startsWith("!github")) {
-    switch (msg[1].toLowerCase()) {
-      // Get a List of projects
+      // Show Projects
       case "projects":
-        client.say(channel, `[Twitch-Bot], [Twitch-Backend]`);
+        axiosCall().then((response) => {
+          const { data } = response;
+          const msgResp = data
+            .map((item) => {
+              return ` [${item.name}]`;
+            })
+            .join();
+
+          client.say(
+            channel,
+            `${msgResp}, you can check more doing !github PROJECTNAME`
+          );
+        });
         break;
 
-      // Specific Projects
-      case "twitch-bot":
-        say("https://github.com/KillerCoderPT/twitch-bot");
-        break;
-
-      case "twitch-backend":
-        say("https://github.com/KillerCoderPT/twitch-backend");
-        break;
-
+      // Show projects by ID
       default:
-        say("https://github.com/KillerCoderPT");
+        axiosCall(msg[1]).then((response) => {
+          const { data } = response;
+          
+          client.say(channel, `${data.name}, ${data.html_url} ${data.description}`)
+        });
         break;
     }
   }

@@ -20,13 +20,13 @@
 
         [x] Get a list of mods
 
-        [ ] GitHub
+        [X] GitHub
 
             [X] Display url
         
-            [ ] List of current Twitch Projects (Axios Call)
+            [X] List of current Twitch Projects (Axios Call)
 
-            [X] By ID = !github Twitch-Bot -- Display the github url repo
+            [x] By ID = !github Twitch-Bot -- Display the github url repo
 
         [x] Current Status
 
@@ -64,5 +64,5 @@
 
 #### TODO
 
-    [ ] Test the command !mod with a mod in the chat
+    [x] Test the command !mod with a mod in the chat
 

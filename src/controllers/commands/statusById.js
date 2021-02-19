@@ -1,4 +1,4 @@
-module.exports.statusById = (client, axiosCall) => (channel, tags, message) => {
+module.exports.statusById = (client, axiosCall) => (channel, userstate, message) => {
   const msg = message.split(" ");
   if (msg.length > 1 && msg[0].toLocaleLowerCase().startsWith("!status")) {
     axiosCall(msg[1]).then((response) => {
@@ -8,7 +8,7 @@ module.exports.statusById = (client, axiosCall) => (channel, tags, message) => {
       if (data.is_live) {
         client.say(
           channel,
-          `@${tags.username}, ${data.display_name} started the live at ${date.started_at} with the title '${data.title}'.`
+          `@${userstate.username}, ${data.display_name} started the live at ${date.started_at} with the title '${data.title}'.`
         );
       } else {
         client.say(

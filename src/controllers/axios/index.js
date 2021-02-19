@@ -10,3 +10,10 @@ module.exports.getStatusById = async (id) => {
   return await axios.get(`${url}/twitch-status/${id}`).then((data) => data);
 };
 
+module.exports.getGithubProjects = async (id = undefined) => {
+  if (id === undefined) {
+    return await axios.get(`${url}/github`).then((data) => data);
+  } else {
+    return await axios.get(`${url}/github/${id}`).then((data) => data);
+  }
+};
