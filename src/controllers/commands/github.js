@@ -2,6 +2,8 @@ module.exports.github = (client, axiosCall) => (channel, message) => {
   // msg is now !github and message is the rest of the array
   const msg = message.toLowerCase().split(" ");
 
+  console.log(msg);
+
   if (msg[0] === "!github") {
     
     switch (msg[1]) {

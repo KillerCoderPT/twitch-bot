@@ -2,6 +2,9 @@
 require("dotenv").config();
 const tmi = require("tmi.js");
 
+// Socket.io
+const { connect, sendMessage } = require("./controllers/socket");
+
 // Commands
 const {
   status,
@@ -18,7 +21,11 @@ const { getHowManyHoursIsLive } = require("./controllers/utils");
 const buddiesList = require("./controllers/utils/buddies.json");
 
 // Axios Calls
-const { getStatus, getStatusById, getGithubProjects } = require("./controllers/axios");
+const {
+  getStatus,
+  getStatusById,
+  getGithubProjects,
+} = require("./controllers/axios");
 
 // TMI Client Options
 const client = new tmi.client({
@@ -38,8 +45,14 @@ const client = new tmi.client({
 // Connect the Bot to the Chat
 client.connect();
 
+// Socket Connection
+// connect();
+
 // When the users send a message
 client.on("message", (channel, userstate, message, self) => {
+  // Socket Send Object
+  sendMessage({ userstate, message });
+
   if (self) return;
 
   // List all the commands
