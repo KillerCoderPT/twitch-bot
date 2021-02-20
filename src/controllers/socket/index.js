@@ -12,6 +12,5 @@ const sendMessage = (obj) => {
 };
 
 module.exports = {
-  //   connect,
   sendMessage,
 };

@@ -3,7 +3,7 @@ require("dotenv").config();
 const tmi = require("tmi.js");
 
 // Socket.io
-const { connect, sendMessage } = require("./controllers/socket");
+const { sendMessage } = require("./controllers/socket");
 
 // Commands
 const {
